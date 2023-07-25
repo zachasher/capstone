@@ -8,7 +8,11 @@ app.get('/', (req, res) => {
     // send some text back as a response
     res.send('Express is running!');
 });
-// END OF NEW CODE
+
+app.get('/test', (req, res) => {
+    // send some text back as a response
+    res.send('Express is testing!');
+});
 
 // start Express on port 8080
 app.listen(8080, () => {
