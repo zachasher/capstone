@@ -3,39 +3,47 @@
 @use "../../styles/typography" as *;
 
 .navbar {
-    // background-color: $Aspire-Red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  height: 4rem;
+  position: sticky;
+  top: 0;
+  transition: background-color 0.3s ease;
+
+  &.navbar-transparent {
+    background-color: transparent;
+  }
+
+  &.navbar-solid {
+    background-color: $Aspire-Red;
+  }
+
+  &__logo {
+    color: $Aspire-White;
+    border: 5px solid white;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  &__links {
     display: flex;
-    justify-content: space-between;
+    height: 100%;
     align-items: center;
+  }
+
+  &__link {
     padding: 0 1rem;
-    height: 4rem;
-    position: sticky;
-    top: 0;
+    cursor: pointer;
+    color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-    &__logo {
-        color: $Aspire-White;
-        border: 5px solid white;
-        padding: 0.5rem;
-        cursor: pointer;
-    }
-
-    &__links {
-        display: flex;
-        height: 100%;
-        align-items: center;
-    }
-
-    &__link {
-        padding: 0 1rem;
-        cursor: pointer;
-        color: white;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
-
-    &__link:hover {
-        color: $Aspire-Red;
-        background-color: $Aspire-White;
-    }
+  &__link:hover {
+    color: $Aspire-Red;
+    background-color: $Aspire-White;
+  }
 }
