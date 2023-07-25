@@ -7,9 +7,9 @@ function NavBar() {
     <div className='navbar'>
         <p className='navbar__logo'>AF Logo</p>
         <div className='navbar__links'>
-            <p>CLASSES</p>
-            <p>CONTACT</p>
-            <p>LOGIN</p>
+            <p className='navbar__link'>CLASSES</p>
+            <p className='navbar__link'>CONTACT</p>
+            <p className='navbar__link'>LOGIN</p>
         </div>
         
     </div>

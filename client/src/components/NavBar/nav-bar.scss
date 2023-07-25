@@ -6,6 +6,9 @@
     background-color: $Aspire-Red;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    height: 4rem;
 
     &__logo {
         color: $Aspire-White;
@@ -13,5 +16,21 @@
 
     &__links {
         display: flex;
+        height: 100%;
+        align-items: center;
+    }
+
+    &__link {
+        padding: 0 1rem;
+        cursor: pointer;
+        color: white;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__link:hover {
+        color: $Aspire-Red;
+        background-color: $Aspire-White;
     }
 }
