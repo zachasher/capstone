@@ -1,0 +1,17 @@
+@use "../../styles/variables" as *;
+@use "../../styles/breakpoints" as *;
+@use "../../styles/typography" as *;
+
+.navbar {
+    background-color: $Aspire-Red;
+    display: flex;
+    justify-content: space-between;
+
+    &__logo {
+        color: $Aspire-White;
+    }
+
+    &__links {
+        display: flex;
+    }
+}
