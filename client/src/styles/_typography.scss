@@ -1,0 +1,115 @@
+@use "./variables" as *;
+
+//Font Size Resets
+html {
+  font-size: 16px;
+}
+
+//Importing Fonts
+@font-face {
+  font-family: "BeVietnamPro";
+  src: url("../Assets/fonts/BeVietNam/BeVietnamPro-Regular.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "BeVietnamPro";
+  src: url("../Assets/fonts/BeVietNam/BeVietnamPro-Bold.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Now";
+  src: url("../Assets/fonts/Now/Now-Regular.otf") format("OpenType");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Now";
+  src: url("../Assets/fonts/Now/Now-Bold.otf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+// Setting Text Styles
+@mixin body-regular($color, $font-size) {
+  font-family: "BeVietnamPro";
+  font-style: normal;
+  font-weight: 400;
+  color: $color;
+  font-size: $font-size;
+}
+
+@mixin body-bold($color, $font-size) {
+  font-family: "BeVietnamPro";
+  font-style: normal;
+  font-weight: 700;
+  color: $color;
+  font-size: $font-size;
+}
+
+@mixin heading-regular($color, $font-size) {
+  font-family: "Now";
+  font-style: normal;
+  font-weight: 400;
+  color: $color;
+  font-size: $font-size;
+}
+
+@mixin heading-bold($color, $font-size) {
+  font-family: "Now";
+  font-style: normal;
+  font-weight: 700;
+  color: $color;
+  font-size: $font-size;
+}
+
+//Text Styles
+//Mobile
+@mixin mobile-body {
+  @include body-regular($Aspire-Black, 0.75rem);
+  line-height: 1.125rem;
+}
+
+@mixin mobile-body-bold {
+  @include body-bold($Aspire-Black, 0.75rem);
+  line-height: 1.125rem;
+}
+
+@mixin mobile-header {
+  @include heading-regular($Aspire-Black, 1.5rem);
+  line-height: 2rem;
+}
+
+@mixin mobile-header-bold {
+  @include heading-bold($Aspire-Black, 1.5rem);
+  line-height: 2rem;
+}
+
+
+
+//Desktop & Tablet
+@mixin desktop-body {
+  @include body-regular($Aspire-Black, 0.875rem);
+  line-height: 1.25rem;
+}
+
+@mixin desktop-body-bold {
+  @include body-bold($Aspire-Black, 0.875rem);
+  line-height: 1.25rem;
+}
+
+@mixin desktop-header {
+  @include heading-regular($Aspire-Black, 2rem);
+  line-height: 2.5rem;
+}
+
+@mixin desktop-header-bold {
+  @include heading-bold($Aspire-Black, 2rem);
+  line-height: 2.5rem;
+}

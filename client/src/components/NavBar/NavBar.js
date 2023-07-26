@@ -17,7 +17,7 @@ function NavBar() {
     const scrollPosition = window.scrollY;
 
     // Update the class name based on the scroll position
-    if (scrollPosition > 100) {
+    if (scrollPosition > 10) {
       setNavbarClass('navbar navbar-solid');
     } else {
       setNavbarClass('navbar navbar-transparent');
