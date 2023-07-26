@@ -36,15 +36,11 @@
   text-align: center;
 
   h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
     @include desktop-header-bold;
     color: $Aspire-White;
   }
 
   p {
-    font-size: 14px;
-    margin: 0;
     @include desktop-body;
     line-height: 1.5rem;
     color: $Aspire-White;
