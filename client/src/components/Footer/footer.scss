@@ -1,0 +1,48 @@
+@use "../../styles/variables" as *;
+@use "../../styles/breakpoints" as *;
+@use "../../styles/typography" as *;
+
+.footer {
+  background-color: $Aspire-Blue;
+  color: #fff;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-icons {
+  font-size: 24px;
+  padding: 1rem 0;
+
+  a {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+
+    &:hover {
+      color: #f0f0f0;
+    }
+  }
+}
+
+.gym-info {
+  text-align: center;
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
