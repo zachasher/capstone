@@ -14,7 +14,7 @@ const ClassCalendarTable = () => {
           Description:
             "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
           Day: "Mon",
-          Time: "7 AM",
+          Time: "7AM",
         },
         {
           "Class ID": 1,
@@ -23,7 +23,7 @@ const ClassCalendarTable = () => {
           Description:
             "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
           Day: "Wed",
-          Time: "6 PM",
+          Time: "6PM",
         },
         {
           "Class ID": 1,
@@ -32,7 +32,7 @@ const ClassCalendarTable = () => {
           Description:
             "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
           Day: "Fri",
-          Time: "5 PM",
+          Time: "5PM",
         },
         {
           "Class ID": 1,
@@ -41,7 +41,7 @@ const ClassCalendarTable = () => {
           Description:
             "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
           Day: "Fri",
-          Time: "12 PM",
+          Time: "12PM",
         },
       ],
     };
@@ -50,7 +50,7 @@ const ClassCalendarTable = () => {
   }, []);
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const times = ["7 AM", "8 AM", "12 PM", "5 PM", "6 PM"];
+  const times = ["7AM", "8AM", "12PM", "5PM", "6PM"];
 
   return (
     <div className="timetable-section">
@@ -58,7 +58,7 @@ const ClassCalendarTable = () => {
       <table className="class-timetable">
       <thead className="column-headings">
         <tr>
-          <th className="class-timetable__time-heading">Time</th>
+          <th className="class-timetable__time-heading"></th>
           {daysOfWeek.map((day) => (
             <th key={day}>{day}</th>
           ))}
