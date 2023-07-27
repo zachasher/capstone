@@ -1,0 +1,34 @@
+[
+  {
+    "Class ID": 1,
+    "Name": "Cardio",
+    "Instructor": "Jessica Smith",
+    "Description": "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+    "Day": "Mon",
+    "Time": "7AM"
+  },
+  {
+    "Class ID": 2,
+    "Name": "Spinning",
+    "Instructor": "Billy Smith",
+    "Description": "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+    "Day": "Wed",
+    "Time": "6PM"
+  },
+  {
+    "Class ID": 3,
+    "Name": "Yoga",
+    "Instructor": "Mary Jane",
+    "Description": "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+    "Day": "Fri",
+    "Time": "5PM"
+  },
+  {
+    "Class ID": 4,
+    "Name": "Boxing",
+    "Instructor": "MaBob Dylan",
+    "Description": "High-intensity boxing workout to burn calories and improve cardiovascular endurance.",
+    "Day": "Fri",
+    "Time": "12PM"
+  }
+]
