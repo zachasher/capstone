@@ -1,52 +1,68 @@
 import "./class-timetable.scss";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const ClassCalendarTable = () => {
   const [classSchedule, setClassSchedule] = useState([]);
 
+  // useEffect(() => {
+  //   const classData = {
+  //     classes: [
+  //       {
+  //         "Class ID": 1,
+  //         Name: "Cardio",
+  //         Instructor: "Jessica Smith",
+  //         Description:
+  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+  //         Day: "Mon",
+  //         Time: "7AM",
+  //       },
+  //       {
+  //         "Class ID": 1,
+  //         Name: "Spinning",
+  //         Instructor: "Billy Smith",
+  //         Description:
+  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+  //         Day: "Wed",
+  //         Time: "6PM",
+  //       },
+  //       {
+  //         "Class ID": 1,
+  //         Name: "Yoga",
+  //         Instructor: "Mary Jane",
+  //         Description:
+  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+  //         Day: "Fri",
+  //         Time: "5PM",
+  //       },
+  //       {
+  //         "Class ID": 1,
+  //         Name: "Test",
+  //         Instructor: "Mary Jane",
+  //         Description:
+  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
+  //         Day: "Fri",
+  //         Time: "12PM",
+  //       },
+  //     ],
+  //   };
+
+  //   setClassSchedule(classData.classes);
+  // }, []);
+
   useEffect(() => {
-    const classData = {
-      classes: [
-        {
-          "Class ID": 1,
-          Name: "Cardio",
-          Instructor: "Jessica Smith",
-          Description:
-            "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-          Day: "Mon",
-          Time: "7AM",
-        },
-        {
-          "Class ID": 1,
-          Name: "Spinning",
-          Instructor: "Billy Smith",
-          Description:
-            "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-          Day: "Wed",
-          Time: "6PM",
-        },
-        {
-          "Class ID": 1,
-          Name: "Yoga",
-          Instructor: "Mary Jane",
-          Description:
-            "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-          Day: "Fri",
-          Time: "5PM",
-        },
-        {
-          "Class ID": 1,
-          Name: "Test",
-          Instructor: "Mary Jane",
-          Description:
-            "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-          Day: "Fri",
-          Time: "12PM",
-        },
-      ],
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/classes");
+        setClassSchedule(response.data);
+        console.log(response.data);
+        console.log(classSchedule);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    setClassSchedule(classData.classes);
+    fetchData();
   }, []);
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -56,40 +72,40 @@ const ClassCalendarTable = () => {
     <div className="timetable-section">
       <h2 className="timetable-section__heading">CLASS TIMETABLE</h2>
       <table className="class-timetable">
-      <thead className="column-headings">
-        <tr>
-          <th className="class-timetable__time-heading"></th>
-          {daysOfWeek.map((day) => (
-            <th key={day}>{day}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {times.map((time) => (
-          <tr key={time}>
-            <td className="time-cells">{time}</td>
-            {daysOfWeek.map((day) => {
-              const classData = classSchedule.find(
-                (classItem) => classItem.Day === day && classItem.Time === time
-              );
-              return (
-                <td className="class-name" key={day}>
-                  {classData ? (
-                    <>
-                      <p>{classData.Name}</p>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </td>
-              );
-            })}
+        <thead className="column-headings">
+          <tr>
+            <th className="class-timetable__time-heading"></th>
+            {daysOfWeek.map((day) => (
+              <th key={day}>{day}</th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {times.map((time) => (
+            <tr key={time}>
+              <td className="time-cells">{time}</td>
+              {daysOfWeek.map((day) => {
+                const classData = classSchedule.find(
+                  (classItem) =>
+                    classItem.day === day && classItem.time === time
+                );
+                return (
+                  <td className="class-name" key={day}>
+                    {classData ? (
+                      <>
+                        <p>{classData.class_name}</p>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    
   );
 };
 
