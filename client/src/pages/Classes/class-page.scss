@@ -9,3 +9,14 @@
     width: 100%;
     
 }
+
+.class-header {
+    margin-top: -4rem;
+    
+    &__image {
+      width: 100vw;
+      &--svg {
+        width: 100%;
+      }
+    }
+  }

@@ -53,7 +53,9 @@ const ClassCalendarTable = () => {
   const times = ["7 AM", "8 AM", "12 PM", "5 PM", "6 PM"];
 
   return (
-    <table className="class-timetable">
+    <div className="timetable-section">
+      <h2 className="timetable-section__heading">CLASS TIMETABLE</h2>
+      <table className="class-timetable">
       <thead className="column-headings">
         <tr>
           <th className="class-timetable__time-heading">Time</th>
@@ -86,6 +88,8 @@ const ClassCalendarTable = () => {
         ))}
       </tbody>
     </table>
+    </div>
+    
   );
 };
 

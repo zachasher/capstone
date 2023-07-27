@@ -1,15 +1,16 @@
-import React from 'react'
+import React from "react";
 import "./nav-bar.scss";
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Logo from "../../Assets/images/aspire-logo.svg";
 
 function NavBar() {
-  const [navbarClass, setNavbarClass] = useState('navbar navbar-transparent');
+  const [navbarClass, setNavbarClass] = useState("navbar navbar-transparent");
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -18,23 +19,25 @@ function NavBar() {
 
     // Update the class name based on the scroll position
     if (scrollPosition > 10) {
-      setNavbarClass('navbar navbar-solid');
+      setNavbarClass("navbar navbar-solid");
     } else {
-      setNavbarClass('navbar navbar-transparent');
+      setNavbarClass("navbar navbar-transparent");
     }
   };
 
+
   return (
     <div className={navbarClass}>
-        <p className='navbar__logo'>AF</p>
-        <div className='navbar__links'>
-            <p className='navbar__link'>CLASSES</p>
-            <p className='navbar__link'>CONTACT</p>
-            <p className='navbar__link'>LOGIN</p>
-        </div>
-        
+      <Link to={'/'} className="logo-container"><img src={Logo} className="logo-container__image"/></Link>
+      <div className="navbar__links">
+        <Link to={'/classes'}>
+          <p className="navbar__link">CLASSES</p>
+        </Link>
+        <Link><p className="navbar__link">CONTACT</p></Link>
+        <Link to={'/login'}><p className="navbar__link">LOGIN</p></Link>
+      </div>
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

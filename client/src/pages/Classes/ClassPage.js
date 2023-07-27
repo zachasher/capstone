@@ -1,14 +1,19 @@
-import React from 'react'
-import ClassTimetable from '../../components/ClassTimetable/ClassTimetable'
-import "./class-page.scss"
+import React from "react";
+import ClassTimetable from "../../components/ClassTimetable/ClassTimetable";
+import "./class-page.scss";
+import ClassHeaderImage from "../../Assets/images/aspire-class-image.svg";
 
 function ClassPage() {
   return (
-    <div className='class-page'>
-      <h2>Class Timetable</h2>
-      <ClassTimetable/>
+    <div className="class-page">
+      <div className="class-header">
+        <div className="class-header__image">
+          <img src={ClassHeaderImage} className="class-header__image--svg"></img>
+        </div>
+      </div>
+      <ClassTimetable />
     </div>
-  )
+  );
 }
 
-export default ClassPage
+export default ClassPage;

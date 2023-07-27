@@ -22,6 +22,9 @@
   }
 
   &__logo {
+    @include desktop-header-bold;
+    font-size: 1rem;
+    line-height: 1.25rem;
     color: $Aspire-White;
     border: 5px solid white;
     padding: 0.5rem;
@@ -49,5 +52,17 @@
   &__link:hover {
     color: $Aspire-Red;
     background-color: $Aspire-White;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo-container {
+  // height: 1rem;
+
+  &__image {
+    height: 36px;
   }
 }
