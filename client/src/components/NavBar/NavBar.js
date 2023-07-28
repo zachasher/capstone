@@ -33,7 +33,7 @@ function NavBar() {
         <Link to={'/classes'}>
           <p className="navbar__link">CLASSES</p>
         </Link>
-        <Link><p className="navbar__link">CONTACT</p></Link>
+        <Link to={'/profile'}><p className="navbar__link">PROFILE</p></Link>
         <Link to={'/login'}><p className="navbar__link">LOGIN</p></Link>
       </div>
     </div>

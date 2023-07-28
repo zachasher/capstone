@@ -1,10 +1,12 @@
 import "./App.css";
+import "./styles/_resets.scss"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage"
 import ClassPage from "./pages/Classes/ClassPage";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import "./styles/_resets.scss"
+import LoginPage from "./pages/LoginPage/LoginPage";
+
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/home" element={<HomePage />}></Route>
           <Route path="/classes" element={<ClassPage />}></Route>
-          <Route path="/login" element={<ClassPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<LoginPage />}></Route>
+          <Route path="/profile" element={<LoginPage />}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
