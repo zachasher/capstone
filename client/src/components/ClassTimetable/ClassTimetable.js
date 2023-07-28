@@ -1,54 +1,10 @@
 import "./class-timetable.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ClassModal from "../ClassModal/ClassModal";
 
 const ClassCalendarTable = () => {
   const [classSchedule, setClassSchedule] = useState([]);
-
-  // useEffect(() => {
-  //   const classData = {
-  //     classes: [
-  //       {
-  //         "Class ID": 1,
-  //         Name: "Cardio",
-  //         Instructor: "Jessica Smith",
-  //         Description:
-  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-  //         Day: "Mon",
-  //         Time: "7AM",
-  //       },
-  //       {
-  //         "Class ID": 1,
-  //         Name: "Spinning",
-  //         Instructor: "Billy Smith",
-  //         Description:
-  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-  //         Day: "Wed",
-  //         Time: "6PM",
-  //       },
-  //       {
-  //         "Class ID": 1,
-  //         Name: "Yoga",
-  //         Instructor: "Mary Jane",
-  //         Description:
-  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-  //         Day: "Fri",
-  //         Time: "5PM",
-  //       },
-  //       {
-  //         "Class ID": 1,
-  //         Name: "Test",
-  //         Instructor: "Mary Jane",
-  //         Description:
-  //           "High-intensity cardio workout to burn calories and improve cardiovascular endurance.",
-  //         Day: "Fri",
-  //         Time: "12PM",
-  //       },
-  //     ],
-  //   };
-
-  //   setClassSchedule(classData.classes);
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,6 +23,20 @@ const ClassCalendarTable = () => {
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const times = ["7AM", "8AM", "12PM", "5PM", "6PM"];
+
+  //CLASS MODAL FUNCTIONS
+  const [classModalOpen, setClassModalOpen] = useState(false);
+  const [selectedClassId, setSelectedClassId] = useState(null);
+
+  const openClassModal = (classId) => {
+    setSelectedClassId(classId);
+    setClassModalOpen(true);
+  };
+
+  const closeClassModal = () => {
+    setSelectedClassId(null);
+    setClassModalOpen(false);
+  };
 
   return (
     <div className="timetable-section">
@@ -93,7 +63,9 @@ const ClassCalendarTable = () => {
                   <td className="class-name" key={day}>
                     {classData ? (
                       <>
-                        <p>{classData.class_name}</p>
+                        <p onClick={() => openClassModal(classData.id)}>
+                          {classData.class_name}
+                        </p>
                       </>
                     ) : (
                       ""
@@ -105,6 +77,13 @@ const ClassCalendarTable = () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <ClassModal
+          isOpen={classModalOpen}
+          onClose={closeClassModal}
+          classId={selectedClassId}
+        />
+      </div>{" "}
     </div>
   );
 };
