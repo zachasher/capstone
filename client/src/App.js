@@ -6,6 +6,7 @@ import ClassPage from "./pages/Classes/ClassPage";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/RegisterPage/SignUpPage";
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
           <Route path="/home" element={<HomePage />}></Route>
           <Route path="/classes" element={<ClassPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/register" element={<LoginPage />}></Route>
-          <Route path="/profile" element={<LoginPage />}></Route>
+          <Route path="/register" element={<SignUpPage />}></Route>
+          <Route path="/profile" element={<HomePage />}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>

@@ -2,9 +2,9 @@
 @use "../../styles/breakpoints" as *;
 @use "../../styles/typography" as *;
 
-.login-page {
+.signup-page {
   background-color: $Aspire-Grey;
-  min-height: 75vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,13 +14,13 @@
   border-top: 4rem solid $Aspire-Red;
 }
 
-.login {
+.signup {
   display: flex;
   flex-direction: column;
   width: 22rem;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-//   border-radius: 0.5rem;
+  // border-radius: 0.5rem;
   padding: 2rem 1.5rem;
   margin-bottom: 1rem;
 
@@ -28,7 +28,6 @@
     @include desktop-header;
     margin-top: 0;
     margin-bottom: 1.5rem;
-
     text-align: center;
     font-size: 1.5rem;
     border-bottom: 5px solid $Aspire-Red;
@@ -38,6 +37,7 @@
 
   &__button {
     margin-top: 1rem;
+
     background-color: $Aspire-Red;
     border: none;
     color: #fff;
@@ -45,7 +45,7 @@
     padding: 0.5rem;
     font-size: inherit;
     cursor: pointer;
-    transition: background-color 0.25s;
+    transition: background-color 0.15s;
 
     &:hover {
       background-color: $Aspire-Blue;
@@ -60,5 +60,5 @@
 }
 
 label {
-    @include desktop-body;
+  @include desktop-body;
 }
