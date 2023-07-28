@@ -1,0 +1,41 @@
+@use "../../styles/variables" as *;
+@use "../../styles/breakpoints" as *;
+@use "../../styles/typography" as *;
+
+.timetable-section {
+  padding: 2rem;
+
+  &__heading {
+    @include desktop-header;
+  }
+}
+
+.class-timetable {
+  background-color: $Aspire-White;
+  justify-content: center;
+  // width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 0;
+}
+
+.time-cells {
+  background-color: $Aspire-Red;
+  color: $Aspire-White;
+  font-size: 14px;
+  width: 50px;
+}
+
+.column-headings {
+  background-color: $Aspire-Red;
+  color: $Aspire-White;
+  font-size: 14px;
+  height: 2rem;
+}
+
+.class-name {
+  background-color: $Aspire-Grey;
+  font-size: 12px;
+  width: 75px;
+  height: 3rem;
+}

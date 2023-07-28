@@ -4,9 +4,11 @@
 
 .header {
   margin-top: -4rem;
-  
+
   &__image {
     width: 100vw;
+    max-height: 500px;
+    overflow: hidden;
 
     &--svg {
       width: 100%;

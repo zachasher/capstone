@@ -3,20 +3,21 @@
 @use "../../styles/typography" as *;
 
 .class-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .class-header {
-    margin-top: -4rem;
-    
-    &__image {
-      width: 100vw;
-      &--svg {
-        width: 100%;
-      }
+  margin-top: -4rem;
+
+  &__image {
+    width: 100vw;
+    max-height: 300px;
+    overflow: hidden;
+    &--svg {
+      width: 100%;
     }
   }
+}

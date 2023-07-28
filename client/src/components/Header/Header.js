@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderImage from "../../Assets/images/aspire-header-image.svg";
+import HeaderImage from "../../Assets/images/Aspire-Header-small.svg";
 import "./header.scss"
 
 function Header() {

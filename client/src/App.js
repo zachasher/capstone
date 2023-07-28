@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/RegisterPage/SignUpPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           <Route path="/classes" element={<ClassPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/register" element={<SignUpPage />}></Route>
-          <Route path="/profile" element={<HomePage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
