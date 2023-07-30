@@ -38,4 +38,10 @@
   font-size: 12px;
   width: 75px;
   height: 3rem;
+  cursor: pointer;
+}
+
+.class-name:hover {
+  color: $Aspire-White;
+  background-color: $Aspire-Blue;
 }

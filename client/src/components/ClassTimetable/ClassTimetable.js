@@ -60,10 +60,10 @@ const ClassCalendarTable = () => {
                     classItem.day === day && classItem.time === time
                 );
                 return (
-                  <td className="class-name" key={day}>
+                  <td className="class-name" key={day} onClick={() => openClassModal(classData.id)}>
                     {classData ? (
                       <>
-                        <p onClick={() => openClassModal(classData.id)}>
+                        <p >
                           {classData.class_name}
                         </p>
                       </>
