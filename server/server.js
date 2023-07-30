@@ -56,6 +56,31 @@ app.get("/classes/:id", (req, res) => {
     });
 });
 
+//ADD A NEW CLASS
+app.post("/classes", (req, res) => {
+  //Check if any class details have been missed
+  if (
+    !req.body.class_name ||
+    !req.body.day ||
+    !req.body.time ||
+    !req.body.instructor ||
+    !req.body.description
+  ) {
+    res.status(400).json({ message: "Please fill out all class details" });
+  } else {
+    //Once all validation is complete, send data to server or catch error
+    knex("classes")
+      .insert(req.body)
+      .then((data) => {
+        res.status(200).json(data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Error creating class" });
+      });
+  }
+});
+
 // start Express on chosen port
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
