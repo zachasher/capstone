@@ -2,6 +2,7 @@ import "./class-timetable.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ClassModal from "../ClassModal/ClassModal";
+import AddClass from "../AddClass/AddClass";
 
 const ClassCalendarTable = () => {
   const [classSchedule, setClassSchedule] = useState([]);
@@ -24,7 +25,7 @@ const ClassCalendarTable = () => {
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const times = ["7AM", "8AM", "12PM", "5PM", "6PM"];
 
-  //CLASS MODAL FUNCTIONS
+  //CLASS DETAILS MODAL FUNCTIONS
   const [classModalOpen, setClassModalOpen] = useState(false);
   const [selectedClassId, setSelectedClassId] = useState(null);
 
@@ -36,6 +37,22 @@ const ClassCalendarTable = () => {
   const closeClassModal = () => {
     setSelectedClassId(null);
     setClassModalOpen(false);
+  };
+
+  //ADD NEW CLASS MODAL FUNCTIONS
+  const [addClassModalOpen, setAddClassModalOpen] = useState(false);
+
+  const openAddClassModal = () => {
+    setAddClassModalOpen(true);
+  };
+
+  const closeAddClassModal = () => {
+    setAddClassModalOpen(false);
+  };
+
+  //UPDATE SCHEDULE WHEN NEW CLASS IS ADDED
+  const updateClassSchedule = (newClass) => {
+    setClassSchedule((prevSchedule) => [...prevSchedule, newClass]);
   };
 
   return (
@@ -60,12 +77,14 @@ const ClassCalendarTable = () => {
                     classItem.day === day && classItem.time === time
                 );
                 return (
-                  <td className="class-name" key={day} onClick={() => openClassModal(classData.id)}>
+                  <td
+                    className="class-name"
+                    key={day}
+                    onClick={() => openClassModal(classData.id)}
+                  >
                     {classData ? (
                       <>
-                        <p >
-                          {classData.class_name}
-                        </p>
+                        <p>{classData.class_name}</p>
                       </>
                     ) : (
                       ""
@@ -84,7 +103,8 @@ const ClassCalendarTable = () => {
           classId={selectedClassId}
         />
       </div>{" "}
-      <button>ADD CLASS</button>
+      <button onClick={() => openAddClassModal()}>ADD CLASS</button>
+      <AddClass isOpen={addClassModalOpen} onClose={closeAddClassModal} updateClassSchedule={updateClassSchedule}/>
     </div>
   );
 };

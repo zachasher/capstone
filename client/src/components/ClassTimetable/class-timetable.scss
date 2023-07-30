@@ -36,15 +36,18 @@
 .class-name {
   background-color: $Aspire-Grey;
   font-size: 12px;
-  width: 75px;
-  height: 3rem;
+  width: 6rem;
+  height: 4rem;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .class-name p {
   @include desktop-body;
   color: inherit;
+  // width: 100px;
+  // height: 2.5rem;
+
 }
 
 .class-name:hover, .class-name p:hover {

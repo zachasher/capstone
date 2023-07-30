@@ -22,12 +22,12 @@ const MemberTimeTable = () => {
   const times = ["7AM", "8AM", "12PM", "5PM", "6PM"];
 
   return (
-    <div className="timetable-section">
-      <h2 className="timetable-section__heading">YOUR TIMETABLE</h2>
-      <table className="class-timetable">
-        <thead className="column-headings">
+    <div className="member-timetable-section">
+      <h2 className="member-timetable-section__heading">YOUR TIMETABLE</h2>
+      <table className="member-class-timetable">
+        <thead className="member-column-headings">
           <tr>
-            <th className="class-timetable__time-heading"></th>
+            <th className="member-class-timetable__time-heading"></th>
             {daysOfWeek.map((day) => (
               <th key={day}>{day}</th>
             ))}
@@ -36,14 +36,14 @@ const MemberTimeTable = () => {
         <tbody>
           {times.map((time) => (
             <tr key={time}>
-              <td className="time-cells">{time}</td>
+              <td className="member-time-cells">{time}</td>
               {daysOfWeek.map((day) => {
                 const classData = classSchedule.find(
                   (classItem) =>
                     classItem.day === day && classItem.time === time
                 );
                 return (
-                  <td className="class-name" key={day}>
+                  <td className="member-class-name" key={day}>
                     {classData ? (
                       <>
                         <p>{classData.class_name}</p>
