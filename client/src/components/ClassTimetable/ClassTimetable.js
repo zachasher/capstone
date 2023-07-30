@@ -84,6 +84,7 @@ const ClassCalendarTable = () => {
           classId={selectedClassId}
         />
       </div>{" "}
+      <button>ADD CLASS</button>
     </div>
   );
 };

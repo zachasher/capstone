@@ -39,9 +39,15 @@
   width: 75px;
   height: 3rem;
   cursor: pointer;
+  padding: 1rem;
 }
 
-.class-name:hover {
+.class-name p {
+  @include desktop-body;
+  color: inherit;
+}
+
+.class-name:hover, .class-name p:hover {
   color: $Aspire-White;
   background-color: $Aspire-Blue;
 }
