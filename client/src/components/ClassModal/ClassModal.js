@@ -19,20 +19,32 @@ function ClassModal({ isOpen, onClose, classId }) {
     }
   }, [isOpen, classId]);
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:8080/classes/${classId}`)
-      .then(() => {
-        onClose();
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error("Error deleting inventory item:", error);
-      });
+  // const handleDelete = () => {
+  //   axios
+  //     .delete(`http://localhost:8080/classes/${classId}`)
+  //     .then(() => {
+  //       alert("Class deleted");
+  //       onClose();
+  //       window.location.reload();
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting class:", error);
+  //     });
+  // };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/classes/${classId}`);
+      alert("Class deleted");
+      window.location.reload();
+      onClose();
+    } catch (error) {
+      console.error("Error deleting class:", error);
+    }
   };
 
   if (!classData) {
-    return null; // or show a loading spinner whilst waiting for data
+    return null;
   }
 
   return (

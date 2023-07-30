@@ -13,7 +13,6 @@ const ClassCalendarTable = () => {
         const response = await axios.get("http://localhost:8080/classes");
         setClassSchedule(response.data);
         console.log(response.data);
-        console.log(classSchedule);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -50,11 +49,6 @@ const ClassCalendarTable = () => {
     setAddClassModalOpen(false);
   };
 
-  //UPDATE SCHEDULE WHEN NEW CLASS IS ADDED
-  const updateClassSchedule = (newClass) => {
-    setClassSchedule((prevSchedule) => [...prevSchedule, newClass]);
-  };
-
   return (
     <div className="timetable-section">
       <h2 className="timetable-section__heading">CLASS TIMETABLE</h2>
@@ -77,14 +71,12 @@ const ClassCalendarTable = () => {
                     classItem.day === day && classItem.time === time
                 );
                 return (
-                  <td
-                    className="class-name"
-                    key={day}
-                    onClick={() => openClassModal(classData.id)}
-                  >
+                  <td className="class-name" key={day}>
                     {classData ? (
                       <>
-                        <p>{classData.class_name}</p>
+                        <p className="class-name__value" onClick={() => openClassModal(classData.id)}>
+                          {classData.class_name}
+                        </p>
                       </>
                     ) : (
                       ""
@@ -104,7 +96,10 @@ const ClassCalendarTable = () => {
         />
       </div>{" "}
       <button onClick={() => openAddClassModal()}>ADD CLASS</button>
-      <AddClass isOpen={addClassModalOpen} onClose={closeAddClassModal} updateClassSchedule={updateClassSchedule}/>
+      <AddClass
+        isOpen={addClassModalOpen}
+        onClose={closeAddClassModal}
+      />
     </div>
   );
 };

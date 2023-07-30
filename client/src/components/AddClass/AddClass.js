@@ -3,7 +3,7 @@ import CloseIcon from "../../Assets/images/icons/close-24px.svg";
 import "./add-class.scss";
 import axios from "axios";
 
-function AddClass({ onClose, isOpen, updateClassSchedule }) {
+function AddClass({ onClose, isOpen }) {
   const [className, setClassName] = useState("");
   const [day, setDay] = useState("");
   const [time, setTime] = useState("");
@@ -30,11 +30,17 @@ function AddClass({ onClose, isOpen, updateClassSchedule }) {
         // Handle successful response
         console.log("Class added successfully:", response.data);
         alert("New class added");
-        updateClassSchedule(newClassData);
+        window.location.reload();
         onClose(); // Close the modal after successful submission
       })
       .catch((error) => {
-        console.error("Error adding class:", error);
+        // Handle error response - alert if duplicate
+        if (error.response && error.response.status === 409) {
+          alert('Class already exists at the same day and time.');
+        } else {
+          console.error('Error adding class:', error);
+          alert('Error adding class. Please try again later.');
+        }
       });
   };
 

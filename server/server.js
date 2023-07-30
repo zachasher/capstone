@@ -68,17 +68,52 @@ app.post("/classes", (req, res) => {
   ) {
     res.status(400).json({ message: "Please fill out all class details" });
   } else {
-    //Once all validation is complete, send data to server or catch error
+    // Check if a class with the same day and time already exists
     knex("classes")
-      .insert(req.body)
-      .then((data) => {
-        res.status(200).json(data[0]);
+      .where({ day: req.body.day, time: req.body.time })
+      .first()
+      .then((existingClass) => {
+        if (existingClass) {
+          // If a class with the same day and time exists, return an error
+          res
+            .status(409)
+            .json({ message: "Class already exists at the same day and time" });
+        } else {
+          // If no class exists at the same day and time, insert the new class data
+          knex("classes")
+            .insert(req.body)
+            .then((data) => {
+              res.status(200).json(data[0]);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({ message: "Error creating class" });
+            });
+        }
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json({ message: "Error creating class" });
+        res.status(500).json({ message: "Error checking for existing class" });
       });
   }
+});
+
+// DELETE A CLASS
+app.delete("/classes/:id", (req, res) => {
+  const classID = req.params.id;
+
+  knex
+    .from("classes")
+    .where("id", classID)
+    .del()
+    .then((deleted) => {
+      res.status(200).json({ message: "Successfully deleted class" });
+      console.log(deleted);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "Error deleting class" });
+      console.log(err);
+    });
 });
 
 // start Express on chosen port
