@@ -56,3 +56,19 @@
   color: $Aspire-White;
   background-color: $Aspire-Blue;
 }
+
+.add-class-button {
+  margin-top: 1rem;
+  background-color: $Aspire-Red;
+  border: none;
+  color: #fff;
+  // border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: inherit;
+  cursor: pointer;
+  transition: background-color 0.25s;
+
+  &:hover {
+    background-color: $Aspire-Blue;
+  }
+}

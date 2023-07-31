@@ -122,7 +122,7 @@ const ClassCalendarTable = () => {
         />
       </div>{" "}
       {user && user.type === "admin" && (
-        <button onClick={() => openAddClassModal()}>ADD CLASS</button>
+        <button className="add-class-button" onClick={() => openAddClassModal()}>ADD CLASS</button>
       )}
       {/* <button onClick={() => openAddClassModal()}>ADD CLASS</button> */}
       <AddClass

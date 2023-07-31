@@ -1,7 +1,7 @@
 import React from "react";
 import ClassTimetable from "../../components/ClassTimetable/ClassTimetable";
 import "./class-page.scss";
-import ClassHeaderImage from "../../Assets/images/Aspire-class-header.jpg";
+import ClassHeaderImage from "../../Assets/images/Aspire-Class-Header.png";
 
 function ClassPage() {
   return (
