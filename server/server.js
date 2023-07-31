@@ -1,5 +1,6 @@
 const express = require("express");
 const knex = require("knex")(require("./knexfile"));
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 require("dotenv").config();
@@ -13,6 +14,9 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cors());
+
+// Routes
+app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   // send some text back as a response
