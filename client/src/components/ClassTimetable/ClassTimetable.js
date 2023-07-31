@@ -49,6 +49,32 @@ const ClassCalendarTable = () => {
     setAddClassModalOpen(false);
   };
 
+  //user auth
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const token = sessionStorage.getItem("token");
+
+      if (!token) {
+        return setUser(null);
+      }
+
+      try {
+        const { data } = await axios.get("http://localhost:8080/users/current", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+        setUser(null);
+      }
+    };
+    loadData();
+  }, []);
+
   return (
     <div className="timetable-section">
       <h2 className="timetable-section__heading">CLASS TIMETABLE</h2>
@@ -95,7 +121,10 @@ const ClassCalendarTable = () => {
           classId={selectedClassId}
         />
       </div>{" "}
-      <button onClick={() => openAddClassModal()}>ADD CLASS</button>
+      {user && user.type === "admin" && (
+        <button onClick={() => openAddClassModal()}>ADD CLASS</button>
+      )}
+      {/* <button onClick={() => openAddClassModal()}>ADD CLASS</button> */}
       <AddClass
         isOpen={addClassModalOpen}
         onClose={closeAddClassModal}

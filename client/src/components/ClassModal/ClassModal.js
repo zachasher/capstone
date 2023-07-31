@@ -5,6 +5,34 @@ import "./class-modal.scss";
 
 function ClassModal({ isOpen, onClose, classId }) {
   const [classData, setClassData] = useState(null);
+  const [user, setUser] = useState(null);
+
+  //user auth
+  useEffect(() => {
+    const loadData = async () => {
+      const token = sessionStorage.getItem("token");
+
+      if (!token) {
+        return setUser(null);
+      }
+
+      try {
+        const { data } = await axios.get(
+          "http://localhost:8080/users/current",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+        setUser(null);
+      }
+    };
+    loadData();
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -58,23 +86,27 @@ function ClassModal({ isOpen, onClose, classId }) {
             alt="close icon"
           />
           <div className="delete-inventory__content">
-            <h2 className="delete-inventory__title">
-              {classData.class_name}
-            </h2>
+            <h2 className="delete-inventory__title">{classData.class_name}</h2>
             <p className="delete-inventory__text">Day: {classData.day}</p>
             <p className="delete-inventory__text">Time: {classData.time}</p>
-            <p className="delete-inventory__text">Instructor: {classData.instructor}</p>
-            <p className="delete-inventory__text">Description: {classData.description}</p>
+            <p className="delete-inventory__text">
+              Instructor: {classData.instructor}
+            </p>
+            <p className="delete-inventory__text">
+              Description: {classData.description}
+            </p>
           </div>
         </div>
-        <div className="delete-inventory__buttons">
-          <button onClick={onClose} className="delete-inventory__cancel">
-            Cancel
-          </button>
-          <button onClick={handleDelete} className="delete-inventory__delete">
-            Delete
-          </button>
-        </div>
+        {user && user.type === "admin" && (
+          <div className="delete-inventory__buttons">
+            <button onClick={onClose} className="delete-inventory__cancel">
+              Cancel
+            </button>
+            <button onClick={handleDelete} className="delete-inventory__delete">
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
