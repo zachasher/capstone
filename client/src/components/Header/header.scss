@@ -4,12 +4,17 @@
 
 .header {
   margin-top: -4rem;
-
+  width: 100vw;
+  max-height: 500px;
+// background-image: url("../../Assets/images/Aspire-header.jpg");
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: contain;
   &__image {
     width: 100vw;
     max-height: 500px;
     overflow: hidden;
-
+    
     &--svg {
       width: 100%;
     }
