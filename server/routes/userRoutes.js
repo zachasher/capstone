@@ -105,4 +105,58 @@ router.get("/current", async (req, res) => {
   }
 });
 
+// GET ALL CLASSES FOR A PARTICULAR MEMBER
+router.get("/:userId/classes", (req, res) => {
+  const userId = req.params.userId;
+
+  knex
+    .from("user_classes")
+    .where({ user_id: userId }) // Filter user_classes by user_id
+    .innerJoin("classes", "user_classes.class_id", "classes.id") // Join with classes table on class_id
+    .select("classes.*") // Select all columns from the classes table
+    .then((data) => {
+      if (data.length > 0) {
+        res.status(200).json(data);
+      } else {
+        res.status(404).json({ message: "No classes found for the user" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
+// ADD CLASSES TO A MEMBER'S PROFILE
+router.post("/:userId/classes/:classId", (req, res) => {
+  const userId = req.params.userId;
+  const classId = req.params.classId;
+
+  // Check if the class exists
+  knex("classes")
+    .where({ id: classId })
+    .first()
+    .then((classData) => {
+      if (!classData) {
+        return res.status(404).json({ message: "Class not found" });
+      }
+      // Insert into USER_CLASSES table (both user id and class id)
+      knex("user_classes")
+        .insert({ user_id: userId, class_id: classId })
+        .then(() => {
+          res.status(200).json({ message: "Class added to profile" });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({ message: "Failed to add class to profile" });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
+
+
 module.exports = router;
