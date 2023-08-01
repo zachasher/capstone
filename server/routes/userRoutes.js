@@ -140,15 +140,34 @@ router.post("/:userId/classes/:classId", (req, res) => {
       if (!classData) {
         return res.status(404).json({ message: "Class not found" });
       }
-      // Insert into USER_CLASSES table (both user id and class id)
+      // Check if the user already has the class in their profile
       knex("user_classes")
-        .insert({ user_id: userId, class_id: classId })
-        .then(() => {
-          res.status(200).json({ message: "Class added to profile" });
+        .where({ user_id: userId, class_id: classId })
+        .first()
+        .then((userClassData) => {
+          if (userClassData) {
+            // The class is already added to the user's profile
+            return res
+              .status(409)
+              .json({ message: "Class already added to profile" });
+          }
+
+          // Insert into USER_CLASSES table (both user id and class id)
+          knex("user_classes")
+            .insert({ user_id: userId, class_id: classId })
+            .then(() => {
+              res.status(200).json({ message: "Class added to profile" });
+            })
+            .catch((err) => {
+              console.log(err);
+              res
+                .status(500)
+                .json({ message: "Failed to add class to profile" });
+            });
         })
         .catch((err) => {
           console.log(err);
-          res.status(500).json({ message: "Failed to add class to profile" });
+          res.status(500).json({ message: "Internal server error" });
         });
     })
     .catch((err) => {
@@ -156,7 +175,5 @@ router.post("/:userId/classes/:classId", (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 });
-
-
 
 module.exports = router;
