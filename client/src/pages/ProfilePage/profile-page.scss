@@ -3,13 +3,55 @@
 @use "../../styles/typography" as *;
 
 .profile {
-    background-color: $Aspire-Blue;
-    border-top: 4rem solid $Aspire-Blue;
-    margin-top: -4rem;
-    padding: 2rem;
-    color: white;
+  background-color: $Aspire-Blue;
+  border-top: 4rem solid $Aspire-Blue;
+  margin-top: -4rem;
+  padding: 2rem;
+  color: white;
+
+  &__name {
+    @include desktop-body-bold;
+    font-size: 2rem;
+    color: $Aspire-White;
+    padding-bottom: 2rem;
+  }
+
+  &__email {
+    padding-bottom: 2rem;
+  }
+
+  &__logout {
+    background-color: $Aspire-Red;
+    color: $Aspire-White;
+    cursor: pointer;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .member-schedule {
-    padding: 15rem 2rem;
+  padding: 15rem 2rem;
+}
+
+.not-logged-in {
+    border-top: 4rem solid $Aspire-Red;
+    margin-top: -4rem;
+    background-color: $Aspire-Grey;
+    padding: 2rem;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__box {
+        background-color: $Aspire-White;
+        padding: 3rem;
+    }
+
+    &__text {
+        @include desktop-body;
+        font-size: 1rem;
+        padding-bottom: 1rem;
+    }
 }

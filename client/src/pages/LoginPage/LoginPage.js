@@ -24,6 +24,7 @@ function LoginPage() {
       sessionStorage.setItem("token", data.token);
 
       navigate("/profile");
+      window.location.reload();
     } catch (error) {
       setError(error.response.data);
     }

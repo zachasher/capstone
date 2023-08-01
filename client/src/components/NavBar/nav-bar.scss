@@ -53,6 +53,21 @@
     color: $Aspire-Red;
     background-color: $Aspire-White;
   }
+
+  &__logout {
+    background-color: transparent;
+    border: none;
+    @include desktop-header;
+    color: $Aspire-White;
+    font-size: 1rem;
+    padding: 0 1rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $Aspire-Red;
+    background-color: $Aspire-White;
+    }
+  }
 }
 
 a {
@@ -60,7 +75,6 @@ a {
 }
 
 .logo-container {
-  // height: 1rem;
 
   &__image {
     height: 36px;

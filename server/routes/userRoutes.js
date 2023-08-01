@@ -52,19 +52,11 @@ router.post("/login", async (req, res) => {
   }
 
   // Validate the password
-  //   const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-  //   if (!isPasswordCorrect) {
-  //     return res.status(400).send("Invalid password");
-  //   }
-
-  // Validate the password
   let isPasswordCorrect = false;
-
-  // Check if the user is an admin and use non-encrypted comparison for admin's password
   if (user.type === "admin") {
     isPasswordCorrect = user.password === password; // Non-encrypted comparison for admin
   } else {
-    // For regular members, use bcrypt compareSync
+    // For regular members, use encrypted password
     isPasswordCorrect = bcrypt.compareSync(password, user.password);
   }
 

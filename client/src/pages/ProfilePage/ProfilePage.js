@@ -41,15 +41,18 @@ function ProfilePage() {
     sessionStorage.removeItem("token");
     setUser(null);
     setFailedAuth(true);
+    window.location.reload();
   };
 
   if (failedAuth) {
     return (
-      <main className="Profile">
-        <p>You must be logged in to see this page.</p>
+      <main className="not-logged-in">
+        <div className="not-logged-in__box">
+          <p className="not-logged-in__text">You must be logged in to see this page.</p>
         <p>
           <Link to="/login">Log in</Link>
         </p>
+        </div>
       </main>
     );
   }
@@ -65,9 +68,10 @@ function ProfilePage() {
   return (
     <div>
       <div className="profile">
-        <h2>Welcome to your profile</h2>
-        <p>User email: {user.email}</p>
-        <button className="Profile__logout" onClick={handleLogout}>
+        <h2 className="profile__name">Welcome back, {user.first_name}</h2>
+        <p className="profile__email">User Type: {user.type}</p>
+        <p className="profile__email">Email: {user.email}</p>
+        <button className="profile__logout" onClick={handleLogout}>
         Log out
       </button>
       </div>

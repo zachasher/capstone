@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ClassModal from "../ClassModal/ClassModal";
 import AddClass from "../AddClass/AddClass";
+import EditClass from "../EditClass/EditClass";
 
 const ClassCalendarTable = () => {
   const [classSchedule, setClassSchedule] = useState([]);
@@ -49,6 +50,22 @@ const ClassCalendarTable = () => {
     setAddClassModalOpen(false);
   };
 
+  //EDIT CLASS MODAL FUNCTIONS
+  const [editClassModalOpen, setEditClassModalOpen] = useState(false);
+  const [editClassData, setEditClassData] = useState(null);
+
+  const openEditClassModal = (classId) => {
+    const classData = classSchedule.find(
+      (classItem) => classItem.id === classId
+    );
+    setEditClassData(classData);
+    setEditClassModalOpen(true);
+  };
+
+  const closeEditClassModal = () => {
+    setEditClassModalOpen(false);
+  };
+
   //user auth
   const [user, setUser] = useState(null);
 
@@ -61,11 +78,14 @@ const ClassCalendarTable = () => {
       }
 
       try {
-        const { data } = await axios.get("http://localhost:8080/users/current", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(
+          "http://localhost:8080/users/current",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setUser(data);
       } catch (error) {
         console.log(error);
@@ -100,7 +120,10 @@ const ClassCalendarTable = () => {
                   <td className="class-name" key={day}>
                     {classData ? (
                       <>
-                        <p className="class-name__value" onClick={() => openClassModal(classData.id)}>
+                        <p
+                          className="class-name__value"
+                          onClick={() => openClassModal(classData.id)}
+                        >
                           {classData.class_name}
                         </p>
                       </>
@@ -119,15 +142,23 @@ const ClassCalendarTable = () => {
           isOpen={classModalOpen}
           onClose={closeClassModal}
           classId={selectedClassId}
+          openEditModal={openEditClassModal}
         />
       </div>{" "}
       {user && user.type === "admin" && (
-        <button className="add-class-button" onClick={() => openAddClassModal()}>ADD CLASS</button>
+        <button
+          className="add-class-button"
+          onClick={() => openAddClassModal()}
+        >
+          ADD CLASS
+        </button>
       )}
-      {/* <button onClick={() => openAddClassModal()}>ADD CLASS</button> */}
-      <AddClass
-        isOpen={addClassModalOpen}
-        onClose={closeAddClassModal}
+      <AddClass isOpen={addClassModalOpen} onClose={closeAddClassModal} />
+      <EditClass
+        isOpen={editClassModalOpen}
+        onClose={closeEditClassModal}
+        classId={editClassData?.id}
+        initialData={editClassData}
       />
     </div>
   );

@@ -8,16 +8,34 @@
   &__1 {
     background-color: $Aspire-Grey;
     width: 50%;
-    padding: 2rem 1rem;
+    padding: 2rem;
   }
 
   &__2 {
     background-color: $Aspire-Red;
     width: 50%;
-    padding: 2rem 1rem;
+    padding: 2rem;
   }
 
-  &__title {
+  &__title1 {
     padding-bottom: 2rem;
+    @include desktop-header-bold;
+    color: black;
+  }
+
+  &__text1 {
+    @include desktop-body;
+    color: black;
+  }
+
+  &__title2 {
+    padding-bottom: 2rem;
+    @include desktop-header-bold;
+    color: white;
+  }
+
+  &__text2 {
+    @include desktop-body;
+    color: white;
   }
 }

@@ -3,7 +3,7 @@ import CloseIcon from "../../Assets/images/icons/close-24px.svg";
 import axios from "axios";
 import "./class-modal.scss";
 
-function ClassModal({ isOpen, onClose, classId }) {
+function ClassModal({ isOpen, onClose, classId, openEditModal }) {
   const [classData, setClassData] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -34,6 +34,7 @@ function ClassModal({ isOpen, onClose, classId }) {
     loadData();
   }, []);
 
+  //get class data
   useEffect(() => {
     if (isOpen) {
       axios
@@ -47,19 +48,28 @@ function ClassModal({ isOpen, onClose, classId }) {
     }
   }, [isOpen, classId]);
 
-  // const handleDelete = () => {
-  //   axios
-  //     .delete(`http://localhost:8080/classes/${classId}`)
-  //     .then(() => {
-  //       alert("Class deleted");
-  //       onClose();
-  //       window.location.reload();
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error deleting class:", error);
-  //     });
-  // };
+  //handle adding class to member schedule
+  const handleAddToSchedule = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      //post request to add class to member schedule
+      await axios.post(
+        `http://localhost:8080/users/${user.id}/classes/${classId}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Class added to your schedule!");
+      onClose(); //close modal after adding class
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  //handle deleting a class
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8080/classes/${classId}`);
@@ -77,33 +87,40 @@ function ClassModal({ isOpen, onClose, classId }) {
 
   return (
     <section className={`class-modal ${isOpen ? "class-modal--open" : ""}`}>
-      <div className="delete-inventory">
-        <div className="delete-inventory__box">
+      <div className="class-details">
+        <div className="class-details__box">
           <img
             src={CloseIcon}
             onClick={onClose}
-            className="delete-inventory__close"
+            className="class-details__close"
             alt="close icon"
           />
-          <div className="delete-inventory__content">
-            <h2 className="delete-inventory__title">{classData.class_name}</h2>
-            <p className="delete-inventory__text">Day: {classData.day}</p>
-            <p className="delete-inventory__text">Time: {classData.time}</p>
-            <p className="delete-inventory__text">
-              Instructor: {classData.instructor}
+          <div className="class-details__content">
+            <h2 className="class-details__title">{classData.class_name.toUpperCase()}</h2>
+            <p className="class-details__text"><b className="class-details__text--bold">Day: </b>{classData.day}</p>
+            <p className="class-details__text"><b className="class-details__text--bold">Time: </b>{classData.time}</p>
+            <p className="class-details__text">
+              <b className="class-details__text--bold">Instructor: </b>{classData.instructor}
             </p>
-            <p className="delete-inventory__text">
-              Description: {classData.description}
+            <p className="class-details__text">
+              <b className="class-details__text--bold">Description: </b>{classData.description}
             </p>
           </div>
         </div>
         {user && user.type === "admin" && (
-          <div className="delete-inventory__buttons">
-            <button onClick={onClose} className="delete-inventory__cancel">
-              Cancel
+          <div className="class-details__buttons">
+            <button onClick={() => openEditModal(classId)} className="class-details__edit">
+              Edit
             </button>
-            <button onClick={handleDelete} className="delete-inventory__delete">
+            <button onClick={handleDelete} className="class-details__delete">
               Delete
+            </button>
+          </div>
+        )}
+        {user && user.type === "member" && (
+          <div className="class-details__buttons">
+            <button onClick={handleAddToSchedule} className="class-details__add">
+              Add to my schedule
             </button>
           </div>
         )}

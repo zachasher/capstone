@@ -18,14 +18,9 @@ app.use(cors());
 // Routes
 app.use("/users", userRoutes);
 
-app.get("/", (req, res) => {
-  // send some text back as a response
+//test endpoint
+app.get("/", (_req, res) => {
   res.send("Express is running!");
-});
-
-app.get("/test", (req, res) => {
-  // send some text back as a response
-  res.send("Express is testing!");
 });
 
 //RETURN ALL CLASSES
@@ -103,24 +98,73 @@ app.post("/classes", (req, res) => {
 });
 
 // DELETE A CLASS
-app.delete("/classes/:id", (req, res) => {
+app.delete("/classes/:id", async (req, res) => {
   const classID = req.params.id;
 
-  knex
-    .from("classes")
-    .where("id", classID)
-    .del()
-    .then((deleted) => {
-      res.status(200).json({ message: "Successfully deleted class" });
-      console.log(deleted);
-    })
-    .catch((err) => {
-      res.status(400).json({ message: "Error deleting class" });
-      console.log(err);
+  try {
+    await knex.transaction(async (trx) => {
+      // Delete from user_classes table where class_id matches
+      await trx("user_classes").where("class_id", classID).del();
+
+      // Delete from classes table where id matches
+      await trx("classes").where("id", classID).del();
+
+      res.status(200).json({ message: "Successfully deleted class and related user classes" });
     });
+  } catch (err) {
+    res.status(400).json({ message: "Error deleting class and related user classes" });
+    console.log(err);
+  }
 });
 
-// start Express on chosen port
+// UPDATE/EDIT A CLASS
+app.put("/classes/:id", (req, res) => {
+  const classId = req.params.id;
+  const updatedClassData = req.body;
+
+  // Check if any class details have been missed
+  if (
+    !updatedClassData.class_name ||
+    !updatedClassData.day ||
+    !updatedClassData.time ||
+    !updatedClassData.instructor ||
+    !updatedClassData.description
+  ) {
+    res.status(400).json({ message: "Please fill out all class details" });
+  } else {
+    // Check if a class with the same day and time already exists
+    knex("classes")
+      .where({ day: updatedClassData.day, time: updatedClassData.time })
+      .whereNot({ id: classId }) // Exclude the current class from the check
+      .first()
+      .then((existingClass) => {
+        if (existingClass) {
+          // If a class with the same day and time exists, return an error
+          res.status(409).json({
+            message: "Class already exists at the same day and time",
+          });
+        } else {
+          // If no class exists at the same day and time, update the class data
+          knex("classes")
+            .where({ id: classId })
+            .update(updatedClassData)
+            .then(() => {
+              res.status(200).json({ message: "Class updated successfully" });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({ message: "Error updating class" });
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Error checking for existing class" });
+      });
+  }
+});
+
+// START EXPRESS ON CHOSEN PORT
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
   console.log("Press CTRL + C to stop server");

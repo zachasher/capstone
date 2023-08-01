@@ -6,10 +6,7 @@
   margin-top: -4rem;
   width: 100vw;
   max-height: 500px;
-  // background-image: url("../../Assets/images/Aspire-header.jpg");
-  //     background-position: center;
-  //     background-repeat: no-repeat;
-  //     background-size: contain;
+  
   &__image {
     width: 100vw;
     max-height: 500px;
@@ -18,7 +15,7 @@
     align-items: center;
     justify-content: center;
 
-    &--svg {
+    &--jpg {
       width: 100%;
     }
   }

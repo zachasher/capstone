@@ -6,7 +6,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header__image">
-        <img src={HeaderImage} className="header__image--svg"></img>
+        <img src={HeaderImage} className="header__image--jpg"></img>
       </div>
     </div>
   );

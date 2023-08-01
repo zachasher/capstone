@@ -3,19 +3,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const MemberTimeTable = () => {
-  const [classSchedule, setClassSchedule] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const token = sessionStorage.getItem("token");
+
+    const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/classes");
-        setClassSchedule(response.data);
+        // Get the user data from the API
+        const { data } = await axios.get("http://localhost:8080/users/current", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Fetch the user's classes based on the user's ID
+        const { data: userClasses } = await axios.get(
+          `http://localhost:8080/users/${data.id}/classes`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setClasses(userClasses);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log(error);
+        // Handle any error that occurs during API calls
       }
     };
 
-    fetchData();
+    fetchClasses();
   }, []);
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -38,7 +56,7 @@ const MemberTimeTable = () => {
             <tr key={time}>
               <td className="member-time-cells">{time}</td>
               {daysOfWeek.map((day) => {
-                const classData = classSchedule.find(
+                const classData = classes.find(
                   (classItem) =>
                     classItem.day === day && classItem.time === time
                 );
